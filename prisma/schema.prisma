@@ -18,7 +18,9 @@ model User {
   confirmedAt         DateTime?     
   person              Person?
   signupToken         String?      @unique
-  signupTokenExpiryAt DateTime?     
+  signupTokenExpiryAt DateTime?
+  resetToken          String?      @unique
+  resetTokenExpiryAt  DateTime?    
   role                String       @default("Creator")
 }
 

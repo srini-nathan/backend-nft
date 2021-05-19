@@ -1,4 +1,4 @@
-import { allow, IRules, rule, shield, deny } from 'graphql-shield'
+import { allow, IRules, rule, shield, deny, and, or } from 'graphql-shield'
 import { getUserId } from '../utils'
 import { Context } from '../context'
 
@@ -7,31 +7,33 @@ export const rules = {
     const userId = getUserId(context)
     return Boolean(userId)
   }),
-  // isPostOwner: rule()(async (_parent, args, context) => {
-  //   const userId = getUserId(context)
-  //   const author = await context.prisma.post
-  //     .findUnique({
-  //       where: {
-  //         id: Number(args.id),
-  //       },
-  //     })
-  //     .author()
-  //   return userId === author.id
-  // }),
+  isAdminToken: rule()(async (parent, args, context: Context) => {
+    const userId = getUserId(context)
+    const user = await context.prisma.user.findUnique({where:{id:userId}})
+    const isNomineeUser = user && user.role === "Admin";
+    return Boolean(isNomineeUser);
+  }),
+  isCreatorToken: rule()(async (parent, args, context: Context) => {
+    const userId = getUserId(context)
+    const user = await context.prisma.user.findUnique({where:{id:userId}})
+    const isCreatorUser = user && user.role === "Creator";
+    return Boolean(isCreatorUser);
+  }),
 }
 
 export const permissions = shield(
   {
     Query: {
       '*': deny,
-      me: rules.isAuthenticatedUser,
-      getAllUser: rules.isAuthenticatedUser,
+      me: and(rules.isAuthenticatedUser, or(rules.isAdminToken, rules.isAdminToken)),
+      getAllUser: and(rules.isAuthenticatedUser, rules.isAdminToken),
     },
     Mutation: {
       '*': deny,
       inviteUser: allow,
       signup: allow,
-      login: rules.isAuthenticatedUser,
+      login: and(rules.isAuthenticatedUser, or(rules.isAdminToken, rules.isAdminToken)),
+      resetPassword:and(rules.isAuthenticatedUser, or(rules.isAdminToken, rules.isAdminToken))
     },
   },
   { debug: true },
