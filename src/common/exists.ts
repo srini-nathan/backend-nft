@@ -1,0 +1,1 @@
+export const exists = (val: any): boolean => Boolean(val);
