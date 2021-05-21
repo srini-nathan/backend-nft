@@ -13,7 +13,8 @@ import { verifyEmailNotTaken } from '../../common/verifyEmailNotTaken'
 import { Context } from '../../context'
 import { IApiCall } from '../ApiCall'
 import { ApiFeedbackEnum } from '../ApiFeedback'
-import { ErrorCodesEnum } from '../ErrorCodes'
+import { ErrorCodesEnum } from '../ErrorCodes' 
+import bcrypt from 'bcrypt'
 
 interface InviteUserParams {
   email: string
@@ -42,9 +43,14 @@ export const inviteUserResolver: core.FieldResolver<'Mutation', 'inviteUser'> =
       numbers: true,
     })
 
+    console.log(randomPassword);
+    
+
+    const hashedPassword = await bcrypt.hash(randomPassword, 10);
+
     // Create new user
     const newUser = await context.prisma.user.create({
-      data: { email, password: randomPassword },
+      data: { email, password: hashedPassword },
     })
 
     // Get Person for user

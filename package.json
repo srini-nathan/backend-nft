@@ -13,6 +13,7 @@
   "dependencies": {
     "@prisma/client": "2.22.1",
     "apollo-server": "2.24.0",
+    "bcrypt": "^5.0.1",
     "bcryptjs": "2.4.3",
     "cuid": "^2.1.8",
     "email-validator": "^2.0.4",
@@ -27,6 +28,7 @@
     "nexus": "1.0.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/bcryptjs": "2.4.2",
     "@types/jsonwebtoken": "8.5.1",
     "@types/node": "12.20.13",
