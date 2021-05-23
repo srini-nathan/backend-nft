@@ -25,15 +25,15 @@ export const permissions = shield(
   {
     Query: {
       '*': deny,
-      me: and(rules.isAuthenticatedUser, or(rules.isAdminToken, rules.isAdminToken)),
+      me: and(rules.isAuthenticatedUser, or(rules.isAdminToken, rules.isCreatorToken)),
       getAllUser: and(rules.isAuthenticatedUser, rules.isAdminToken),
     },
     Mutation: {
       '*': deny,
       inviteUser: allow,
       signup: allow,
-      login: and(rules.isAuthenticatedUser, or(rules.isAdminToken, rules.isAdminToken)),
-      resetPassword:and(rules.isAuthenticatedUser, or(rules.isAdminToken, rules.isAdminToken))
+      login: allow,
+      resetPassword:and(rules.isAuthenticatedUser, or(rules.isAdminToken, rules.isCreatorToken))
     },
   },
   { debug: true },
