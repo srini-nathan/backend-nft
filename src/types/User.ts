@@ -6,6 +6,7 @@ export const User = objectType({
     t.nonNull.string('id')
     t.nonNull.string('email')
     t.nonNull.boolean('active')
+    t.nonNull.string('role')
     t.field('person', { type: 'Person' })
   },
 })
