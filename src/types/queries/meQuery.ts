@@ -9,6 +9,7 @@ export const meResolver: core.FieldResolver<'Query', 'me'> = async (
   ctx: Context,
 ): Promise<User> => {
   const userId = getUserId(ctx)
+  
 
   return await ctx.prisma.user.findUnique({
     where: { id: userId },

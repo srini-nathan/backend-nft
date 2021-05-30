@@ -33,6 +33,9 @@ export const inviteUserResolver: core.FieldResolver<'Mutation', 'inviteUser'> =
       ForbiddenError,
     )
 
+    console.log(email, role);
+    
+
     enforceExists(role, ErrorCodesEnum.FIELD_IS_REQUIRED, NotFoundError)
 
     // Check if email is already registered
