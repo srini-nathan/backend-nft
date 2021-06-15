@@ -1,6 +1,9 @@
 import { ApolloServer } from 'apollo-server'
 import { createContext } from './context'
 import { schema } from './schema'
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
 const server = new ApolloServer({
   schema,

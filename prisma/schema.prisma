@@ -8,26 +8,44 @@ datasource db {
 }
 
 model User {
-  id                  String       @id @default(cuid()) 
-  email               String       @unique
+  id                  String    @id @default(cuid())
+  email               String    @unique
   password            String
-  active              Boolean      @default(true)
-  invitedAt           DateTime     @default(now("0"))
-  createdAt           DateTime     @default(now("0")) 
-  updatedAt           DateTime     @default(now("0")) 
-  confirmedAt         DateTime?     
+  active              Boolean   @default(true)
+  invitedAt           DateTime  @default(now("0"))
+  createdAt           DateTime  @default(now("0"))
+  updatedAt           DateTime  @default(now("0"))
+  confirmedAt         DateTime?
   person              Person?
-  signupToken         String?      @unique
+  signupToken         String?   @unique
   signupTokenExpiryAt DateTime?
-  resetToken          String?      @unique
-  resetTokenExpiryAt  DateTime?    
-  role                String       @default("Creator")
+  resetToken          String?   @unique
+  resetTokenExpiryAt  DateTime?
+  role                String    @default("Creator")
+  nft                 NFT?
 }
 
 model Person {
-  id           String       @id @default(cuid())
-  firstName    String
-  lastName     String
-  userId       String       @unique
-  user         User         @relation(fields: [userId], references: [id])
+  id        String @id @default(cuid())
+  firstName String
+  lastName  String
+  userId    String @unique
+  user      User   @relation(fields: [userId], references: [id])
+}
+
+model NFT {
+  id     String @id @default(cuid())
+  ipfs   Ipfs[]
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model Ipfs {
+  id          String  @id @default(cuid())
+  ipfsHash    String  @unique
+  tokenName   String?
+  tokenSymbol String?
+  isMinted    Boolean @default(false)
+  NFT         NFT?    @relation(fields: [nFTId], references: [id])
+  nFTId       String?
 }

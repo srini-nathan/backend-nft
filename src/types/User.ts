@@ -8,5 +8,6 @@ export const User = objectType({
     t.nonNull.boolean('active')
     t.nonNull.string('role')
     t.field('person', { type: 'Person' })
+    t.field('nft', { type: 'NFT' })
   },
 })
