@@ -41,11 +41,12 @@ model NFT {
 }
 
 model Ipfs {
-  id          String  @id @default(cuid())
-  ipfsHash    String  @unique
-  tokenName   String?
-  tokenSymbol String?
-  isMinted    Boolean @default(false)
-  NFT         NFT?    @relation(fields: [nFTId], references: [id])
-  nFTId       String?
+  id           String  @id @default(cuid())
+  ipfsHash     String  @unique
+  tokenName    String?
+  tokenSymbol  String?
+  isMinted     Boolean @default(false)
+  isAssetReady Boolean @default(false)
+  NFT          NFT?    @relation(fields: [nFTId], references: [id])
+  nFTId        String?
 }

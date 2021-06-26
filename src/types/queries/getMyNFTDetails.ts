@@ -9,6 +9,7 @@ interface ipfsType {
   tokenName: string | null
   tokenSymbol: string | null
   isMinted: boolean
+  isAssetReady:boolean
   nFTId: string | null
 }
 

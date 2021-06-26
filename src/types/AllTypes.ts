@@ -13,4 +13,8 @@ export * from "./MyPatents"
 export * from "./MyNFTPatent"
 export * from "./IpfsItem"
 export * from './NFT'
+export * from "./Authentication"
+export * from "./Media"
+export * from "./MyNFTAsset"
+export * from "./AssetListInSale"
 

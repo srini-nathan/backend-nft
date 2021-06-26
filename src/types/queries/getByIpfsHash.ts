@@ -8,9 +8,21 @@ import { ErrorCodesEnum } from '../ErrorCodes'
 import NotFoundError from '../../common/errors/NotFoundError'
 
 interface ipfsItem {
-  assetItem: string
-  description: string
   name: string
+  description: string
+  assetFileName: string
+  image: string
+  media: {
+    dimensions: string
+    mimeType: string
+    size: number | undefined
+  }
+  authentication: {
+    metaDataHash: string | undefined
+    signature: string | undefined
+    owner: string | undefined
+  }
+  patentId: string
 }
 
 export const getByIpfsHashResolver: core.FieldResolver<

@@ -50,6 +50,30 @@ export const permissions = shield(
         rules.isAuthenticatedUser,
         or(rules.isAdminToken, rules.isCreatorToken),
       ),
+      getMyNFTAsset: and(
+        rules.isAuthenticatedUser,
+        or(rules.isAdminToken, rules.isCreatorToken),
+      ),
+      getAllListings: and(
+        rules.isAuthenticatedUser,
+        or(rules.isAdminToken, rules.isCreatorToken),
+      ),
+      getTokenIdByAssetIndex: and(
+        rules.isAuthenticatedUser,
+        or(rules.isAdminToken, rules.isCreatorToken),
+      ),
+      verifyAssetIsOnSale: and(
+        rules.isAuthenticatedUser,
+        or(rules.isAdminToken, rules.isCreatorToken),
+      ),
+      getTokenOwnership: and(
+        rules.isAuthenticatedUser,
+        or(rules.isAdminToken, rules.isCreatorToken),
+      ),
+      getAssetsByUser: and(
+        rules.isAuthenticatedUser,
+        or(rules.isAdminToken, rules.isCreatorToken),
+      ),
     },
     Mutation: {
       '*': deny,
@@ -64,7 +88,7 @@ export const permissions = shield(
         rules.isAuthenticatedUser,
         or(rules.isAdminToken, rules.isCreatorToken),
       ),
-      updateNFTIsMinted: and(
+      updateNFT: and(
         rules.isAuthenticatedUser,
         or(rules.isAdminToken, rules.isCreatorToken),
       ),

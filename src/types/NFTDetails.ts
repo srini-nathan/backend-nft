@@ -6,6 +6,7 @@ export const NFTDetails = objectType({
     t.nonNull.string('id')
     t.nonNull.string('ipfsHash')
     t.nonNull.boolean('isMinted')
+    t.nonNull.boolean('isAssetReady')
     t.nullable.string('nFTId')
   },
 })

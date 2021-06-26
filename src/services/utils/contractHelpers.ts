@@ -1,27 +1,30 @@
-import patentNFTDataAbi from '../../config/contracts/PatentNFTData.sol/PatentNFTData.json'
-import patentNFTMarketplaceAbi from '../../config/contracts/PatentNFTMarketPlace.sol/PatentNFTMarketplace.json'
-import patentNFTFactoryAbi from '../../config/contracts/PatentNFTFactory.sol/PatentNFTFactory.json'
-import { ethers,Signer } from 'ethers'
+import assetNFTAbi from '../../config/contracts/Asset.sol/Asset.json'
+// import assetMarketPlaceAbi from '../../config/contracts/AssetMarketPlace.sol/AssetMarketPlace.json'
+import assetDrivingAbi from '../../config/contracts/AssetDriving.sol/AssetDriving.json'
+
+import { ethers, Signer } from 'ethers'
 import { Provider } from '@ethersproject/abstract-provider'
 
-const PatentNFTData = process.env.PatentNFTData ?? ''
-const PatentNFTMarketplace = process.env.PatentNFTMarketplace ?? ''
-const PatentNFTFactory = process.env.PatentNFTFactory ?? ''
+const AssetDriving = process.env.AssetDriving ?? ''
+const AssetMarketPlace = process.env.AssetMarketPlace ?? ''
+const AssetNFT = process.env.AssetNFTData ?? ''
 
-
-const getContract = (abiFile: any, address: string, signerOrProvider:Signer | Provider) => {
+const getContract = (
+  abiFile: any,
+  address: string,
+  signerOrProvider: Signer | Provider,
+) => {
   return new ethers.Contract(address, abiFile.abi, signerOrProvider)
 }
 
-export const getPatentNFTData = (signerOrProvider:Signer | Provider) => {
-  return getContract(patentNFTDataAbi, PatentNFTData, signerOrProvider)
+// export const getAssetMarketPlace = (signerOrProvider: Signer | Provider) => {
+//   return getContract(assetMarketPlaceAbi, AssetMarketPlace, signerOrProvider)
+// }
+
+export const getAssetDriving = (signerOrProvider: Signer | Provider) => {
+  return getContract(assetDrivingAbi, AssetDriving, signerOrProvider)
 }
 
-export const getPatentNFTMarketplace = (signerOrProvider:Signer | Provider) => {
-  return getContract(patentNFTMarketplaceAbi, PatentNFTMarketplace, signerOrProvider)
+export const getAssetNFT = (signerOrProvider: Signer | Provider) => {
+  return getContract(assetNFTAbi, AssetNFT, signerOrProvider)
 }
-
-export const getPatentNFTFactory = (signerOrProvider:Signer | Provider) => {
-  return getContract(patentNFTFactoryAbi, PatentNFTFactory, signerOrProvider)
-}
-
