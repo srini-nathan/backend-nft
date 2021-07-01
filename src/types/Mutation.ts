@@ -4,7 +4,7 @@ import { login } from './mutations/login'
 import { resetPasswordConfig } from './mutations/resetPassword'
 import { signup } from './mutations/signup'
 import { createIPFSHash } from './mutations/createIPFSHash'
-import { updateNFT } from './mutations/updateNFT'
+import { updateWalletAddress } from './mutations/updateWalletAddress'
 
 export const Mutation = objectType({
   name: 'Mutation',
@@ -14,6 +14,6 @@ export const Mutation = objectType({
     t.field('login', login)
     t.field('resetPassword', resetPasswordConfig)
     t.field('createIPFSHash', createIPFSHash)
-    t.field('updateNFT', updateNFT)
+    t.field('updateWalletAddress', updateWalletAddress)
   },
 })

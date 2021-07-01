@@ -6,10 +6,7 @@ import { Ipfs } from '.prisma/client'
 interface ipfsType {
   id: string
   ipfsHash: string
-  tokenName: string | null
-  tokenSymbol: string | null
-  isMinted: boolean
-  isAssetReady:boolean
+  assetIndex:string
   nFTId: string | null
 }
 

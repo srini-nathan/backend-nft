@@ -12,6 +12,7 @@ import { ErrorCodesEnum } from '../ErrorCodes'
 
 interface IPFSHashParams {
   ipfsHash: string
+  assetIndex: string
   nftId?: string | null
 }
 
@@ -20,17 +21,18 @@ export const createIPFSHashResolver: core.FieldResolver<
   'createIPFSHash'
 > = async (
   _parent: any,
-  { ipfsHash, nftId }: IPFSHashParams,
+  { ipfsHash, assetIndex, nftId }: IPFSHashParams,
   context: Context,
 ): Promise<IApiCall> => {
   enforceExists(ipfsHash, ErrorCodesEnum.FIELD_IS_REQUIRED, NotFoundError)
+  enforceExists(assetIndex, ErrorCodesEnum.FIELD_IS_REQUIRED, NotFoundError)
 
   const userId = getUserId(context)
   if (nftId) {
     await context.prisma.nFT.update({
       where: { id: nftId },
       data: {
-        ipfs: { create: { ipfsHash } },
+        ipfs: { create: { ipfsHash, assetIndex } },
       },
     })
 
@@ -39,7 +41,7 @@ export const createIPFSHashResolver: core.FieldResolver<
 
   await context.prisma.nFT.create({
     data: {
-      ipfs: { create: { ipfsHash } },
+      ipfs: { create: { ipfsHash, assetIndex } },
       user: { connect: { id: userId } },
     },
   })
@@ -54,6 +56,7 @@ export const createIPFSHash: core.NexusOutputFieldConfig<
   type: 'ApiCall',
   args: {
     ipfsHash: nonNull(stringArg()),
+    assetIndex: nonNull(stringArg()),
     nftId: nullable(stringArg()),
   },
   resolve: createIPFSHashResolver,

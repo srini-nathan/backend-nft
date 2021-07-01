@@ -1,5 +1,5 @@
 import { Context } from '../../context'
-import { core, intArg, nonNull, stringArg } from 'nexus'
+import { core, nonNull, stringArg } from 'nexus'
 import { getUserId } from '../../utils'
 import { enforceExists } from '../../common/errors/enforce'
 import { ErrorCodesEnum } from '../ErrorCodes'
@@ -8,8 +8,11 @@ import { getAssetByAssetId } from '../../services/nft/getAssetByAssetId'
 import { BigNumberish, ethers } from 'ethers'
 
 enum Status {
-  "Created",
-  "minted"
+  'created',
+  'minted',
+  'listed',
+  'unListed',
+  'sold',
 }
 
 interface MyAsset {
@@ -33,14 +36,16 @@ export const getMyNFTAssetByIndexResolver: core.FieldResolver<
   const userId = getUserId(ctx)
 
   enforceExists(assetIndex, ErrorCodesEnum.FIELD_IS_REQUIRED, NotFoundError)
-  
 
   const myAssetResp: MyAsset_Resp = await getAssetByAssetId(Number(assetIndex))
-  
 
   const price = ethers.utils.formatEther(myAssetResp._assetPrice)
 
-  const myAsset: MyAsset = { ...myAssetResp, _assetPrice: parseFloat(price), _status:Status[myAssetResp._status as any] }
+  const myAsset: MyAsset = {
+    ...myAssetResp,
+    _assetPrice: parseFloat(price),
+    _status: Status[myAssetResp._status as any],
+  }
 
   return myAsset
 }

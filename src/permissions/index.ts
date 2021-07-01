@@ -74,6 +74,22 @@ export const permissions = shield(
         rules.isAuthenticatedUser,
         or(rules.isAdminToken, rules.isCreatorToken),
       ),
+      verifyMintRole: and(
+        rules.isAuthenticatedUser,
+        or(rules.isAdminToken, rules.isCreatorToken),
+      ),
+      getUserIPFSByNftId: and(
+        rules.isAuthenticatedUser,
+        or(rules.isAdminToken),
+      ),
+      verifyNFTStatus: and(
+        rules.isAuthenticatedUser,
+        or(rules.isAdminToken, rules.isCreatorToken),
+      ),
+      getMyNFTCollectables: and(
+        rules.isAuthenticatedUser,
+        or(rules.isAdminToken, rules.isCreatorToken),
+      ),
     },
     Mutation: {
       '*': deny,
@@ -88,9 +104,9 @@ export const permissions = shield(
         rules.isAuthenticatedUser,
         or(rules.isAdminToken, rules.isCreatorToken),
       ),
-      updateNFT: and(
+      updateWalletAddress: and(
         rules.isAuthenticatedUser,
-        or(rules.isAdminToken, rules.isCreatorToken),
+        or(rules.isAdminToken),
       ),
     },
   },

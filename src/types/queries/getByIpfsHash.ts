@@ -20,7 +20,7 @@ interface ipfsItem {
   authentication: {
     metaDataHash: string | undefined
     signature: string | undefined
-    owner: string | undefined
+    creator: string | undefined
   }
   patentId: string
 }

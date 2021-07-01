@@ -5,6 +5,6 @@ export const Authentication = objectType({
   definition(t) {
     t.nullable.string('metaDataHash')
     t.nullable.string('signature')
-    t.nullable.string('owner')
+    t.nullable.string('creator')
   },
 })

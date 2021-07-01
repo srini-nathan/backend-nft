@@ -12,6 +12,10 @@ import { getTokenIdByAssetIndex } from './queries/getTokenIdByAssetIndex'
 import { verifyAssetIsOnSale } from './queries/verifyAssetIsOnSale'
 import { getTokenOwnership } from './queries/getTokenOwnership'
 import { fetchAssetsByUser } from './queries/fetchAssetsByUser'
+import { verifyMintRole } from './queries/verifyMintRole'
+import { getUserIPFSByNftId } from './queries/admin/getUserIPFSByNftId'
+import { verifyNFTStatus } from './queries/verifyNFTStatus'
+import { getMyNFTCollection } from './queries/getMyNFTCollection'
 
 export const Query = objectType({
   name: 'Query',
@@ -29,5 +33,9 @@ export const Query = objectType({
     t.field('verifyAssetIsOnSale', verifyAssetIsOnSale)
     t.field('getTokenOwnership', getTokenOwnership)
     t.list.field('getAssetsByUser', fetchAssetsByUser)
+    t.field('verifyMintRole', verifyMintRole)
+    t.list.field('getUserIPFSByNftId',getUserIPFSByNftId)
+    t.field('verifyNFTStatus', verifyNFTStatus)
+    t.list.field('getMyNFTCollectables', getMyNFTCollection)
   },
 })

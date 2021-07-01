@@ -1,6 +1,5 @@
 import { User } from '.prisma/client'
-import { core, FieldResolver } from 'nexus'
-import { ArgsRecord, extendType, NexusOutputFieldConfig } from 'nexus/dist/core'
+import { ArgsRecord } from 'nexus/dist/core'
 import { Context } from '../../../context'
 
 export const getAllUserResolver = async (
@@ -9,7 +8,7 @@ export const getAllUserResolver = async (
   ctx: Context,
 ): Promise<User[]> => {
   try {
-    const users = await ctx.prisma.user.findMany({ include: { person: true } })
+    const users = await ctx.prisma.user.findMany({ include: { person: true, nft:true } })
     return users
   } catch (error) {
     return error
